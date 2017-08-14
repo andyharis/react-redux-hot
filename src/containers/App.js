@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {increment,decrement} from 'redux/modules/increment';
-const mapStateToProps = state => {
-  return {
-    count: state.increment.count
-  }
-}
+import Test from './Test';
+import TreeComponent from 'components/TreeComponent';
+import {Layout} from 'antd';
+import {config} from "configs/TreeConfig"
 
-const mapDispatchToProps = dispatch => {
-  return {
-    increment: e=>dispatch(increment()),
-    decrement: e=>dispatch(decrement()),
-  }
-}
-
-@connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
   render() {
-    const {count} = this.props;
-    return <div>
-      You clicked this button {count} times.
-      <button onClick={this.props.increment}>Increment</button>
-      <button onClick={this.props.decrement}>Decrement</button>
-    </div>
+    return (<Layout className="layout">
+        <Layout.Header>
+        </Layout.Header>
+
+        <Layout.Content>
+          <div className="content">
+            {/*<TreeComponent config={config}/>*/}
+            <Test/>
+          </div>
+        </Layout.Content>
+
+        <Layout.Footer>
+        </Layout.Footer>
+
+      </Layout>
+    );
   }
 }
