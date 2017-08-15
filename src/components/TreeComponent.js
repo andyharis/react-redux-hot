@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import BranchComponent from "components/BranchComponent";
-
+import TreeConfig from 'configs/TreeConfig';
 export default class TreeComponent extends Component {
   getTree = (tree, level, result = []) => {
     tree.map((el, key) => {
@@ -20,6 +20,6 @@ export default class TreeComponent extends Component {
 
   render() {
     const {config} = this.props;
-    return <div>{this.getTree(config, 0)}</div>
+    return <div>{this.getTree(TreeConfig, 0)}</div>
   }
 }

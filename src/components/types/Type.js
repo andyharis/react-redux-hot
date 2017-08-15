@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+
 export const TypeForm = (TypeComponent) => {
   return class TypeForm extends Component {
     static propTypes = {
-      value: PropTypes.string
+      value: PropTypes.any
     };
     state = {
       value: this.props.value || ''
@@ -32,3 +33,7 @@ export const TypeView = (TypeComponent) => {
     }
   }
 };
+const TypeConfig = {
+  label: 'Label title'
+}
+export default TypeConfig;

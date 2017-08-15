@@ -1,4 +1,4 @@
-export const config = [
+const config = [
   {
     name: '1',
     id: 1,
@@ -44,3 +44,4 @@ export const config = [
     ]
   },
 ]
+export default config;

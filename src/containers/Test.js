@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import 'antd/dist/antd.css';
-import './App.css';
 import {Row, Form, Col, Layout} from 'antd';
 import {config} from "configs/TestConfig"
 import * as Types from "components/types";
