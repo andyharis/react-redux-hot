@@ -27,7 +27,7 @@ export class DateTypeForm extends Component {
 export class DateTypeView extends Component {
   render() {
 
-    const {value} = this.props;
-    return <span dangerouslySetInnerHTML={{__html: value}}></span>
+    const {value,format} = this.props;
+    return <span dangerouslySetInnerHTML={{__html: moment(value).format(format)}}></span>
   }
 }

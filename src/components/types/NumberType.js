@@ -36,7 +36,8 @@ export class NumberTypeForm extends Component {
 @TypeView
 export class NumberTypeView extends Component {
   render() {
-    const {value} = this.props;
-    return <span dangerouslySetInnerHTML={{__html: value}}></span>
+    const {value,prefix,separator,postfix} = this.props;
+    return <span dangerouslySetInnerHTML={{__html:
+      `${prefix || ''}${value.replace(/\B(?=(\d{3})+(?!\d))/g, separator || '')}${postfix || ''}`}}></span>
   }
 }

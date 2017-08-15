@@ -30,7 +30,7 @@ export class TimeTypeForm extends Component {
 export class TimeTypeView extends Component {
   render() {
 
-    const {value} = this.props;
-    return <span dangerouslySetInnerHTML={{__html: value}}></span>
+    const {value,format} = this.props;
+    return <span dangerouslySetInnerHTML={{__html: moment(value).format(format)}}></span>
   }
 }

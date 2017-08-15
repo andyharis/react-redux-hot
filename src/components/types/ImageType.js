@@ -1,6 +1,6 @@
 import React, {Component,} from 'react';
 import {TypeForm, TypeView} from './Type';
-import {Upload, Button, Icon} from 'antd';
+import {Upload, Button, Icon, Row, Col} from 'antd';
 
 @TypeForm
 export class ImageTypeForm extends Component {
@@ -26,9 +26,16 @@ export class ImageTypeForm extends Component {
 }
 @TypeView
 export class ImageTypeView extends Component {
-  render() {
 
+  render() {
     const {value} = this.props;
-    return <span dangerouslySetInnerHTML={{__html: value}}></span>
+    return <Upload
+      listType="picture-card"
+      showUploadList={{
+        showRemoveIcon: false,
+      }}
+      disabled={true}
+      defaultFileList={value}>
+    </Upload>
   }
 }

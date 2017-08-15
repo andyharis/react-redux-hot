@@ -18,7 +18,7 @@ const TypeComponent = (props) => {
 export default class Test extends Component {
   state = {
     test: '',
-    action: "form",
+    action: "view",
   }
 
   render() {
