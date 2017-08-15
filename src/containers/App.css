@@ -10,25 +10,34 @@
 .content {
     margin: 0 auto;
     width: 1024px;
+    background: #fff;
+    padding: 24px;
+    margin-top:20px;
+    minHeight: 280px;
 }
-.ant-row.ant-form-item{
+
+.ant-row.ant-form-item {
     margin-bottom: 0px;
 }
-.ant-form-item-label{
-    line-height: 15px ;
+
+.ant-form-item-label {
+    line-height: 15px;
 }
-.tree-level{
+
+.tree-level {
     margin-left: 10px;
     color: rgba(0, 0, 0, 0.5);
 }
-.tree-level .click{
-    font-weight:bold;
+
+.tree-level .click {
+    font-weight: bold;
     color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
-.image-type{
-    max-width:100%;
+
+.image-type {
+    max-width: 100%;
     margin: 0 auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import middleware from './middleware';
 import Reducers from './modules';
 
 export default function configureStore() {
@@ -12,7 +13,11 @@ export default function configureStore() {
     });
   }
 
-  const reducer = combineReducers(Reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-  const store = createStore(reducer);
+  const reducer = combineReducers(Reducers);
+  const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(middleware),
+  );
   return store;
 }
