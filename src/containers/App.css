@@ -1,3 +1,21 @@
+.pointer {
+  cursor: pointer;
+}
+.default-table thead > tr > th {
+  background-color: #ddd !important;
+}
+.form-row {
+
+}
+
+.form-label {
+  font-size: 14px;
+}
+
+.form-input {
+  width: 200px;
+}
+
 .loader {
   position: relative;
   margin: 0;
@@ -12,9 +30,12 @@
   height: 100%;
   z-index: 100;
   opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out 0.2s, visibility 0.4s ease-out 0.3s;
 }
 
 .active {
+  visibility: visible;
   opacity: 0.7;
 }
 

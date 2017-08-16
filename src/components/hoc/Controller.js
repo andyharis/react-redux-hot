@@ -35,13 +35,18 @@ export function prepareColumns(attributes, props = {}, chain = []) {
   return data;
 }
 
-export function prepareDataForFetch(table, additionalParams = {}) {
+export function prepareDataForFetch(table, additionalParams = {}, withDetails = false) {
   const config = configs[table];
   if (config) {
     let params = {
       limit: config.limit,
       select: getSelectAttributes(config.attributes),
       ...additionalParams
+    }
+    if (withDetails && config.details) {
+      config.details.forEach(details => {
+        params.select[details.table] = getSelectAttributes(details.attributes);
+      });
     }
     if (params.where) {
       params.where = JSON.stringify(params.where);
@@ -59,7 +64,7 @@ export default function Controller(WrappedComponent) {
   return class Controller extends Component {
     static propTypes = {
       dataManipulator: PropTypes.object,
-      fetchData:PropTypes.func
+      fetchData: PropTypes.func
     }
 
     componentDidMount() {
@@ -79,7 +84,7 @@ export default function Controller(WrappedComponent) {
         params.page = page;
       if (id)
         params.where = [{[config.pk]: `:=${id}`}];
-      this.props.fetchData(table, prepareDataForFetch(table, params));
+      this.props.fetchData(table, prepareDataForFetch(table, params, id));
     }
 
     render() {

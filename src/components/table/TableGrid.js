@@ -25,6 +25,7 @@ class TableGrid extends Component {
       <Table bordered={true}
              size="small"
              dataSource={data}
+             className="default-table"
              {...this.props}
       />
     </LocaleProvider>

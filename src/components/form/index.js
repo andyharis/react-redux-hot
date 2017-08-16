@@ -1,1 +1,1 @@
-export DefaultFormBuilder from './DefaultFormBuilder';
+export DefaultFormBuilder from './default/DefaultFormBuilder';

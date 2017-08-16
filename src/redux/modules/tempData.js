@@ -11,14 +11,20 @@ const initialState = {
 export default function (state = initialState, action = {}) {
   switch (action.type) {
     case TEMP_LOAD:
-      return {...state, loading: false, ...action.result};
+      return {
+        ...state,
+        loading: false,
+        local: [...state.local, action.result.local],
+        server: [...state.server, action.result.server],
+        index: action.result.index
+      };
     default:
       return state;
   }
 }
 
 
-export function loadTemp(local, server = [], index = 0) {
+export function loadTemp(local = {}, server = {}, index = 0) {
   return {type: TEMP_LOAD, result: {local, server, index}};
 }
 
@@ -33,6 +39,6 @@ export function getCurrentData() {
 export function saveTemp(localChain, serverChain, localData, serverData) {
   return (dispatch, getState) => {
     const {local, server} = dispatch(getCurrentData());
-    console.info(local,server);
+    console.info(local, server);
   }
 }

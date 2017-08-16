@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Controller, Loader} from 'components/hoc';
 import {getCurrentData, loadTemp} from "redux/modules/tempData";
-import DefaultFormBuilder from "components/form/DefaultFormBuilder";
-
+import DefaultFormBuilder from "components/form/default/DefaultFormBuilder";
+import {Button} from 'antd';
 const mapState = state => ({tempData: state.tempData});
 const mapDispatch = {
   getCurrentData,
@@ -23,8 +23,9 @@ export default class EditTable extends Component {
   }
 
   componentWillReceiveProps(next) {
-    if (this.props.dataManipulator.result !== next.dataManipulator.result)
+    if (this.props.dataManipulator.result !== next.dataManipulator.result) {
       this.props.loadTemp(next.dataManipulator.result.data[0]);
+    }
   }
 
 
@@ -32,14 +33,23 @@ export default class EditTable extends Component {
     const {id, config} = this.props;
     const action = id ? 'edit' : 'add';
     const {loading: fetching} = this.props.dataManipulator;
-    const {loading: temping, local, server} = this.props.tempData;
+    const {loading: temping, local,server,index} = this.props.tempData;
+    const loading = fetching || temping;
+    const message = fetching ? 'Fetching data...' : 'Preparing save...';
     return <div>
-      <Loader loading={fetching || temping}
-              hint={fetching ? 'Fetching data...' : 'Preparing save...'}>
-        <DefaultFormBuilder local={local}
+      <Loader loading={loading}
+              showWhileLoading={false}
+              hint={message}>
+        {!loading && local &&
+        <DefaultFormBuilder local={local[index]}
                             config={config}
-                            server={server}
+                            server={server[index]}
                             action={action}/>
+        }
+        {index > 0 && <div>
+          <Button type="primary">Save</Button>
+          <Button type="danger">Discard</Button>
+        </div>}
       </Loader>
     </div>
   }

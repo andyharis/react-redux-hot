@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 export const TypeForm = (TypeComponent) => {
   return class TypeForm extends Component {
     static propTypes = {
-      value: PropTypes.any
+      value: PropTypes.any,
+      onChange: PropTypes.func
     };
     state = {
       value: this.props.value || ''
     }
 
-    handleChange = e => this.setState({value: e.target.value})
+    handleChange = e => this.setState({value: e.target ? e.target.value : e}, b => this.props.onChange(this.state.value))
 
     render() {
       const {value} = this.state;
@@ -36,7 +37,13 @@ export const TypeView = (TypeComponent) => {
 export const MainConfig = {
   table: 'default',
   limit: 10,
-  pk: 'iID'
+  pk: 'iID',
+  toDetails: function () {
+    return {
+      table: this.table,
+      attributes: this.attributes
+    };
+  }
 };
 
 const TypeConfig = {

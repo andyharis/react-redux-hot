@@ -12,7 +12,7 @@ export function TypeRender(props) {
   return <span>Can't find type <b>{type}</b>.</span>
 }
 
-export function GridTypeRender(props, chain, data, additionalProps) {
+export function GridTypeRender(props, chain = [], data = {}, additionalProps = {}) {
   chain = [...chain, props.attribute];
   const value = _.get(data, chain, `No data for ${chain.join('.')}`);
   return TypeRender({...props, ...additionalProps, value});
