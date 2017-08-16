@@ -4,8 +4,8 @@ export default {
   table: 'clientsSites',
   attributes: [
     {
+      ...TextInputTypeConfig,
       attribute: 'sSite',
-      ...TextInputTypeConfig
     }
   ]
 }

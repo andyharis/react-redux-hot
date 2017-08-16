@@ -1,5 +1,5 @@
 import React, {Component,} from 'react';
-import {TypeForm, TypeView} from './Type';
+import TypeConfig, {TypeForm, TypeView} from './Type';
 import {DatePicker} from 'antd';
 
 import moment from 'moment';
@@ -11,7 +11,7 @@ export class TimeTypeForm extends Component {
 
   handleChangeDate = (e, value) => {
     console.log(e, value);
-    this.props.handleChange({target:{value: e}})
+    this.props.handleChange({target: {value: e}})
   }
 
   render() {
@@ -30,7 +30,14 @@ export class TimeTypeForm extends Component {
 export class TimeTypeView extends Component {
   render() {
 
-    const {value,format} = this.props;
+    const {value, format} = this.props;
     return <span dangerouslySetInnerHTML={{__html: moment(value).format(format)}}></span>
   }
 }
+const TimeTypeConfig = {
+  ...TypeConfig,
+  type: 'TimeType',
+  format: "HH:mm",
+
+}
+export default TimeTypeConfig;

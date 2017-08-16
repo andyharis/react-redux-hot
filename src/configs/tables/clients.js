@@ -2,10 +2,12 @@ import {TextInputTypeConfig} from 'components/types';
 
 export default {
   table: 'clients',
-  attributes: [
-    {
-      attribute: 'sCompanyName',
-      ...TextInputTypeConfig
+  attributes: {
+    sCompanyName:{
+      ...TextInputTypeConfig,
+      label:"Name Company",
+      attribute: "sCompanyName",
+
     }
-  ]
+  }
 }

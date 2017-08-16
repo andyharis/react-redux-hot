@@ -1,12 +1,12 @@
 import React, {Component,} from 'react';
-import {TypeForm, TypeView} from './Type';
-import { Input } from 'antd';
+import TypeConfig, {TypeForm, TypeView} from './Type';
+import {Input} from 'antd';
 @TypeForm
 export class TextAreaTypeForm extends Component {
   render() {
     const {value, handleChange} = this.props;
-    return <Input.TextArea autosize={{ minRows: 2, maxRows: 6 }}
-                  value={value} onChange={handleChange}/>
+    return <Input.TextArea autosize={{minRows: 2, maxRows: 6}}
+                           value={value} onChange={handleChange}/>
   }
 }
 @TypeView
@@ -16,5 +16,10 @@ export class TextAreaTypeView extends Component {
     return <span dangerouslySetInnerHTML={{__html: value}}></span>
   }
 }
+const TextAreaTypeConfig = {
+  ...TypeConfig,
+  type: 'TextAreaType',
+  popup: true,
 
-
+}
+export default TextAreaTypeConfig;

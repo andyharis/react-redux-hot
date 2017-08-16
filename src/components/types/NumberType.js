@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TypeForm, TypeView} from './Type';
+import TypeConfig, {TypeForm, TypeView} from './Type';
 import {InputNumber} from 'antd';
 @TypeForm
 export class NumberTypeForm extends Component {
@@ -36,8 +36,17 @@ export class NumberTypeForm extends Component {
 @TypeView
 export class NumberTypeView extends Component {
   render() {
-    const {value,prefix,separator,postfix} = this.props;
-    return <span dangerouslySetInnerHTML={{__html:
-      `${prefix || ''}${value.replace(/\B(?=(\d{3})+(?!\d))/g, separator || '')}${postfix || ''}`}}></span>
+    const {value, prefix, separator, postfix} = this.props;
+    return <span dangerouslySetInnerHTML={{
+      __html: `${prefix || ''}${value.replace(/\B(?=(\d{3})+(?!\d))/g, separator || '')}${postfix || ''}`
+    }}></span>
   }
 }
+const NumberTypeConfig = {
+  ...TypeConfig,
+  type: 'NumberType',
+  prefix: '',
+  postfix: '',
+  separator: ''
+}
+export default NumberTypeConfig;

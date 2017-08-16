@@ -1,5 +1,5 @@
 import React, {Component,} from 'react';
-import {TypeForm, TypeView} from './Type';
+import TypeConfig, {TypeForm, TypeView} from './Type';
 import {Upload, Button, Icon, Row, Col} from 'antd';
 
 @TypeForm
@@ -39,3 +39,8 @@ export class ImageTypeView extends Component {
     </Upload>
   }
 }
+const ImageTypeConfig = {
+  ...TypeConfig,
+  type: 'ImageType',
+}
+export default ImageTypeConfig;

@@ -1,5 +1,5 @@
 import React, {Component,} from 'react';
-import {TypeForm, TypeView} from './Type';
+import TypeConfig, {TypeForm, TypeView} from './Type';
 import {DatePicker} from 'antd';
 
 import moment from 'moment';
@@ -17,7 +17,7 @@ export class DateTypeForm extends Component {
   render() {
     const {value, format} = this.props;
     return <LocaleProvider locale={enUS}>
-      <DatePicker value={value? moment(value):null}
+      <DatePicker value={value ? moment(value) : null}
                   format={format}
                   onChange={this.handleChangeDate}/>
     </LocaleProvider>
@@ -26,8 +26,14 @@ export class DateTypeForm extends Component {
 @TypeView
 export class DateTypeView extends Component {
   render() {
-
-    const {value,format} = this.props;
-    return <span dangerouslySetInnerHTML={{__html: moment(value).format(format)}}></span>
+    const {value, format} = this.props;
+    return <span dangerouslySetInnerHTML={{__html: value ? moment(value).format(format) : ""}}></span>
   }
 }
+const DateTypeConfig = {
+  ...TypeConfig,
+  type: 'DateType',
+  format: "YYYY/MM/DD",
+
+}
+export default DateTypeConfig;
