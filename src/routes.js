@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import TreeComponent from 'components/TreeComponent';
 import EditTable from 'containers/EditTable';
 import GridTable from 'containers/GridTable';
 import NotFound from 'containers/NotFound';
+import Grid from 'containers/Grid';
+import Test from 'containers/Test';
+
 
 const App = () => (
   <Switch>
@@ -13,6 +16,8 @@ const App = () => (
     <Route path="/edit/:table/:id" component={EditTable}/>
     <Route path="/edit/:table" component={EditTable}/>
     <Route path="/tree" component={TreeComponent}/>
+    <Route path="/grid" component={Grid}/>
+    <Route path="/test" component={Test}/>
     <Route component={NotFound}/>
   </Switch>
 )

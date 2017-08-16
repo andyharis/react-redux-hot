@@ -34,8 +34,12 @@ export default class EditTable extends Component {
     const {loading: fetching} = this.props.dataManipulator;
     const {loading: temping, local, server} = this.props.tempData;
     return <div>
-      <Loader loading={fetching || temping} hint={fetching ? 'Fetching data...' : 'Preparing save...'}>
-        <DefaultFormBuilder local={local} config={config} action={action}/>
+      <Loader loading={fetching || temping}
+              hint={fetching ? 'Fetching data...' : 'Preparing save...'}>
+        <DefaultFormBuilder local={local}
+                            config={config}
+                            server={server}
+                            action={action}/>
       </Loader>
     </div>
   }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TableGrid from "components/table/TableGrid";
-import {Controller,getSelectAttributes, prepareColumns, prepareDataForFetch} from 'components/hoc';
+import {Controller, prepareColumns,Loader} from 'components/hoc';
+import AgGridComponent from 'components/table/AgGridComponent';
 
 @Controller
 export default class GridTable extends Component {
@@ -24,13 +25,15 @@ export default class GridTable extends Component {
     const {table, page, config, history} = this.props;
     const {loading, result} = this.props.dataManipulator;
     const {data, totalCount} = result;
-    const pagination = {
-      total: parseInt(totalCount),
-      pageSize: config.limit,
-      current: parseInt(page) || 1,
-      onChange: (page) => history.push(`/table/${table}/${page}`)
-    };
-    const {columns} = this.state;
-    return <TableGrid loading={loading} data={data} columns={columns} pagination={pagination} rowKey="iID"/>
+    // const pagination = {
+    //   total: parseInt(totalCount),
+    //   pageSize: config.limit,
+    //   current: parseInt(page) || 1,
+    //   onChange: (page) => history.push(`/table/${table}/${page}`)
+    // };
+    // const {columns} = this.state;
+    return <Loader loading={loading}>
+      <AgGridComponent config={config} loading={loading} data={data}/>
+    </Loader>
   }
 }

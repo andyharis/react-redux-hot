@@ -17,7 +17,7 @@ const middleware = store => next => action => {
         (error) => next({...rest, error, type: FAILURE})
       )
       .catch((error) => next({...rest, error, type: FAILURE}));
-  }, 200);
+  }, 1500);
   return promise;
 };
 export default middleware;

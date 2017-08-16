@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Row, Form, Col, Layout} from 'antd';
-import {config} from "configs/TestConfig"
+import config from "configs/tables/item"
 import * as Types from "components/types";
 
 const TypeComponent = (props) => {
@@ -21,20 +21,25 @@ export default class Test extends Component {
 
   render() {
     const {action} = this.state;
-    return (<Form>
-        {config.map((row, rowID) => {
-          return <Row key={`row-${rowID}`} gutter={16}>
-            {row.map((col, colID) => {
-              return <Col span={24} style={col.style}
-                          key={`row-${rowID}-col-${colID}`}>
-                <Form.Item label={col.label}>
-                  <TypeComponent {...col} action={action}/>
-                </Form.Item>
-              </Col>
-            })}
-          </Row>
-        })}
-      </Form>
+    // return (<Form>
+    //     {config.map((row, rowID) => {
+    //       return <Row key={`row-${rowID}`} gutter={16}>
+    //         {row.map((col, colID) => {
+    //           return <Col span={24} style={col.style}
+    //                       key={`row-${rowID}-col-${colID}`}>
+    //             <Form.Item label={col.label}>
+    //               <TypeComponent {...col} action={action}/>
+    //             </Form.Item>
+    //           </Col>
+    //         })}
+    //       </Row>
+    //     })}
+    //   </Form>
+    // );
+    return (<div>
+        qqqqqqqqqqqqq
+        <TypeComponent {...config.attributes.product.attributes.bStockItem} action={action}/>
+      </div>
     );
   }
 }

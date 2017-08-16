@@ -5,9 +5,7 @@ import {Spin} from 'antd';
 const Loader = (props) => {
   const {loading, delay, hint, showWhileLoading} = props;
   return <div className="loader">
-    {loading &&
-    <div className="loader-wrapper"></div>
-    }
+    <div className={`loader-wrapper ${loading ? 'active' : ''}`}></div>
     <Spin spinning={loading}
           delay={delay || 100}
           tip={hint || "Loading data..."}
@@ -16,6 +14,9 @@ const Loader = (props) => {
     {showWhileLoading && props.children}
     {(!showWhileLoading && !loading) && props.children}
   </div>
+}
+Loader.defaultProps = {
+  showWhileLoading: true
 }
 Loader.propTypes = {
   loading: PropTypes.bool.isRequired,

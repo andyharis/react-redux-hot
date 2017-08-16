@@ -34,6 +34,7 @@ export const config = [
     {
       field: 'test',
       label: 'TextInputType',
+      value: 'test input',
       style: {
         width: 150,
       },
@@ -51,14 +52,27 @@ export const config = [
         uid: -1,
         name: 'xxx.png',
         status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        url: 'https://images4.cosmopolitan.ru/upload/img_cache/b44/b44e2dd8fc4b668789d4b9c7d5003be7_fitted_740x0.jpg',
+        thumbUrl: 'https://images4.cosmopolitan.ru/upload/img_cache/b44/b44e2dd8fc4b668789d4b9c7d5003be7_fitted_740x0.jpg',
       }, {
         uid: -2,
-        name: 'yyy.png',
+        name: 'xxx.png',
         status: 'done',
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
         thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      }, {
+        uid: -3,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+
+      }, {
+        uid: -4,
+        name: 'yyy.png',
+        status: 'done',
+        url: 'https://vk.com/images/deactivated_hid_200.gif',
+        thumbUrl: 'https://vk.com/images/deactivated_hid_200.gif',
       }],
       type: "ImageType",
     },{

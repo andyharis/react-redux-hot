@@ -25,7 +25,7 @@ export const TypeForm = (TypeComponent) => {
 export const TypeView = (TypeComponent) => {
   return class TypeView extends Component {
     static propTypes = {
-      value: PropTypes.string
+      value: PropTypes.any
     };
 
     render() {
