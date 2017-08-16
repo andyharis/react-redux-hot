@@ -33,6 +33,12 @@ export const TypeView = (TypeComponent) => {
     }
   }
 };
+export const MainConfig = {
+  table: 'default',
+  limit: 10,
+  pk: 'iID'
+};
+
 const TypeConfig = {
   label: 'Label title'
 }

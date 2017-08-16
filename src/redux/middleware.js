@@ -10,12 +10,14 @@ const middleware = store => next => action => {
   const [REQUEST, SUCCESS, FAILURE] = types;
   next({...rest, type: REQUEST});
   const promise = request(api, store.dispatch, store.getState);
-  promise
-    .then(
-      (result) => next({...rest, result: result.data, type: SUCCESS}),
-      (error) => next({...rest, error, type: FAILURE})
-    )
-    .catch((error) => next({...rest, error, type: FAILURE}));
+  setTimeout(() => {
+    promise
+      .then(
+        (result) => next({...rest, result: result.data, type: SUCCESS}),
+        (error) => next({...rest, error, type: FAILURE})
+      )
+      .catch((error) => next({...rest, error, type: FAILURE}));
+  }, 200);
   return promise;
 };
 export default middleware;

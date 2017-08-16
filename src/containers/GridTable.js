@@ -1,51 +1,36 @@
 import React, {Component} from 'react';
-import * as configs from 'configs/tables';
-import axios from 'axios';
-import {connect} from 'react-redux';
 import TableGrid from "components/table/TableGrid";
-import {fetchData, fetchData1} from "redux/modules/dataManipulator";
+import {Controller,getSelectAttributes, prepareColumns, prepareDataForFetch} from 'components/hoc';
 
-const columns = [
-  {
-    key: 'sCompanyName',
-    title: 'Client',
-    dataIndex: 'sCompanyName'
-  }
-];
-const mapState = state => ({dataManipulator: state.dataManipulator});
-const mapDispatch = {fetchData, fetchData1};
-@connect(mapState, mapDispatch)
+@Controller
 export default class GridTable extends Component {
   state = {
-    data: [],
-    pagination: {},
-    loading: false
+    columns: [],
+    action: 0
   }
 
   componentDidMount() {
-    this.fetchData(this.props);
+    this.setColumns();
   }
 
-  fetchData = () => {
-    this.props.fetchData1('http://grid.com/gql/clients');
+  setColumns = () => {
+    const {config} = this.props;
+    this.setState({
+      columns: prepareColumns(config.attributes, {action: this.state.action ? 'view' : 'form'})
+    });
   }
 
   render() {
-    console.info(this.props.dataManipulator);
-    const {match: {params: {table}}} = this.props;
+    const {table, page, config, history} = this.props;
     const {loading, result} = this.props.dataManipulator;
     const {data, totalCount} = result;
     const pagination = {
-      total: totalCount
+      total: parseInt(totalCount),
+      pageSize: config.limit,
+      current: parseInt(page) || 1,
+      onChange: (page) => history.push(`/table/${table}/${page}`)
     };
-    const config = configs[table];
-    if (!config)
-      return <div>
-        Not found {table}
-      </div>
-    return <div>
-      <button onClick={this.fetchData}>Fetch</button>
-      <TableGrid loading={loading} data={data} columns={columns} pagination={pagination} rowKey="iID"/>
-    </div>
+    const {columns} = this.state;
+    return <TableGrid loading={loading} data={data} columns={columns} pagination={pagination} rowKey="iID"/>
   }
 }
