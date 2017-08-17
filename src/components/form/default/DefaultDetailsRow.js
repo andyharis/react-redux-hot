@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {Card} from 'antd';
 import {prepareColumns} from 'components/hoc';
 import TableGrid from "components/table/TableGrid";
 
 export default class DefaultDetailsRow extends Component {
+  static propTypes = {
+    local:PropTypes.object,
+    server:PropTypes.object
+  }
   state = {
     columns: [],
     isOpen: false
@@ -14,9 +19,21 @@ export default class DefaultDetailsRow extends Component {
   }
 
   setColumns = () => {
-    const {config, action} = this.props;
+    const {config, action,local,server} = this.props;
+    const localChain = [config.table];
+    const serverChain = [config.table, action];
     this.setState({
-      columns: prepareColumns(config.attributes, {action: action != 'view' ? 'form' : 'view'})
+      columns: prepareColumns(config.attributes, {
+        action: 'form',
+        local,
+        server,
+        localChain,
+        serverChain,
+        onChange: (value, props) => {
+          console.log("Inside table", value, props);
+          this.props.tempSave
+        }
+      })
     });
   }
 
@@ -31,7 +48,10 @@ export default class DefaultDetailsRow extends Component {
       bodyStyle={{padding: isOpen ? 10 : 0}}
     >
       {isOpen &&
-      <TableGrid data={data} columns={columns}/>
+      <TableGrid data={data}
+                 columns={columns}
+                 rowKey={(o, k) => `${config.table}.${o[config.pk]}.${k}`}
+      />
       }
     </Card>
   }

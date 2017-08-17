@@ -7,17 +7,21 @@ export default class DefaultDetailsBuilder extends Component {
 
   static propTypes = {
     config: PropTypes.object,
-    data: PropTypes.object,
+    local: PropTypes.object,
+    server: PropTypes.object,
     action: PropTypes.string
   }
 
 
   render() {
-    const {config: {details}, data, action} = this.props;
+    const {config: {details}, local,server, action} = this.props;
     return <div>
       {details.map((each, key) => {
         return <DefaultDetailsRow config={each}
-                                  data={data[each.table]}
+                                  tempSave={this.props.tempSave}
+                                  data={local[each.table]}
+                                  local={local}
+                                  server={server}
                                   action={action}
                                   key={key}
         />

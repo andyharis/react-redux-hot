@@ -4,6 +4,7 @@ import * as configs from 'configs/tables';
 import {GridTypeRender} from 'components/types/Helper';
 import {connect} from 'react-redux';
 import {fetchData} from "redux/modules/dataManipulator";
+import _ from 'lodash';
 
 export function getSelectAttributes(attributes) {
   const data = {};
@@ -18,6 +19,23 @@ export function getSelectAttributes(attributes) {
   return data;
 }
 
+// export function getServerChain(serverChain, localChain, action, index, {local, server}) {
+//   const chain = [...serverChain];
+//   const tempChain = serverChain.splice(0, 1);
+//   if (action == 'edit') {
+//
+//   } else {
+//     const serverCount = _.get(server, [...tempChain, 'add'], []);
+//     const localCount = _.get(local, localChain, []);
+//     const localKeys = localCount.length;
+//     const serverKeys = serverCount.length || localKeys;
+//     const trueKey = index - (localKeys - serverKeys);
+//     chain.push(trueKey);
+//   }
+//   console.info("Server chain", chain.join('.'), action);
+//   return chain;
+// }
+
 export function prepareColumns(attributes, props = {}, chain = []) {
   let data = [];
   Object.keys(attributes).forEach((attribute, key) => {
@@ -27,7 +45,19 @@ export function prepareColumns(attributes, props = {}, chain = []) {
         title: o.label || attribute,
         key: `${attribute}.${key}.${chain.join('.')}`,
         dataIndex: [...chain, attribute].join('.'),
-        render: (text, record) => GridTypeRender(o, chain, record, props)
+        render: (text, record, index) => {
+          const nProps = {
+            ...props,
+            row: record,
+            index,
+          };
+          // console.info(props.action);
+          if (props.action !== 'view') {
+            nProps.localChain = [...props.localChain, index];
+            nProps.serverChain = [...props.serverChain];
+            return GridTypeRender(o, chain, record, nProps);
+          }
+        }
       })
     else
       data = [...data, ...prepareColumns(o.attributes, props, [...chain, attribute])];
@@ -88,14 +118,18 @@ export default function Controller(WrappedComponent) {
     }
 
     render() {
-      const {match: {params: {table, page, id}}} = this.props;
+      const {match: {params: {table, page, id}, url}} = this.props;
       const config = configs[table];
+      let action = id ? 'edit' : 'add';
+      if (url.match('table'))
+        action = 'view';
       if (!config)
         return <div>
           Not found {table}
         </div>
       return <div>
         <WrappedComponent {...this.props}
+                          action={action}
                           table={table}
                           page={page}
                           id={id}
