@@ -1,11 +1,11 @@
-import {MainConfig, TextInputTypeConfig} from 'components/types';
+import {MainConfig, TextInputTypeConfig, RelationTypeConfig} from 'components/types';
 import product from './product';
 import itemCategory from './itemCategory';
 import itemSubCategory from './itemSubCategory';
 
 const {attributes: {bStockItem}} = product;
 const {attributes: {sName}} = itemCategory;
-const {attributes: {sName:subCategory}} = itemSubCategory;
+const {attributes: {sName: subCategory}} = itemSubCategory;
 export default {
   ...MainConfig,
   table: 'itemProduct',
@@ -15,6 +15,12 @@ export default {
       attribute: 'sName',
       label: 'Product'
     },
+    iItemCategoryID: {
+      ...RelationTypeConfig,
+      searchField: 'sName',
+      pk: 'iID',
+      searchTable: itemCategory.table
+    },
     itemCategory: {
       attributes: {
         sName
@@ -22,7 +28,7 @@ export default {
     },
     itemSubCategory: {
       attributes: {
-        sName:subCategory
+        sName: subCategory
       }
     },
     product: {

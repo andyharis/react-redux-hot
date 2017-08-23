@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Row, Form, Col, Layout} from 'antd';
-import config from "configs/tables/item"
+import config from "configs/tables/itemProduct"
 import * as Types from "components/types";
+import Request from "components/request/Request";
 
 const TypeComponent = (props) => {
   let type = `${props.type}View`;
@@ -37,8 +38,7 @@ export default class Test extends Component {
     //   </Form>
     // );
     return (<div>
-        qqqqqqqqqqqqq
-        <TypeComponent {...config.attributes.product.attributes.bStockItem} action={action}/>
+        <TypeComponent {...config.attributes.iItemCategoryID} action={action}/>
       </div>
     );
   }

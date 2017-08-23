@@ -5,5 +5,6 @@ export TimeTypeConfig, {TimeTypeView, TimeTypeForm} from "./TimeType";
 export NumberTypeConfig, {NumberTypeView, NumberTypeForm} from "./NumberType";
 export CheckboxTypeConfig, {CheckboxTypeView, CheckboxTypeForm} from "./CheckboxType";
 export DropdownTypeConfig, {DropdownTypeView, DropdownTypeForm} from "./DropdownType";
+export RelationTypeConfig, {RelationTypeView, RelationTypeForm} from "./RelationType";
 export {ImageTypeView, ImageTypeForm} from "./ImageType";
 export {MainConfig} from './Type';
