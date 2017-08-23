@@ -34,15 +34,17 @@ class DefaultFormBuilder extends Component {
     action: PropTypes.string
   }
 
+  tempSave = (value, {localChain,serverChain}) => {
+    console.info(value, localChain,serverChain);
+  }
+
   render() {
-    const {config, local, action} = this.props;
+    const {config, local,server, action} = this.props;
     console.info(this.props.local);
     const types = prepareInputs(config.attributes, {
       data: local,
       action: 'form',
-      onChange: function (...rest) {
-        console.info(rest);
-      }
+      onChange: this.tempSave
     }, []);
     return <div>
       <h2>{action == 'edit' ? 'Editing' : 'Adding'} {config.label || config.table}</h2>
@@ -54,7 +56,13 @@ class DefaultFormBuilder extends Component {
         <h2>Details</h2>
         <hr/>
         <div style={{padding: '8px'}}>
-          <DefaultDetailsBuilder data={local} action={action} config={config}/>
+          <DefaultDetailsBuilder
+            local={local}
+            server={server}
+            action={action}
+            config={config}
+            tempSave={this.tempSave}
+          />
         </div>
       </div>
       }

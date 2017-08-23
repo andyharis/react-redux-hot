@@ -30,8 +30,7 @@ export default class EditTable extends Component {
 
 
   render() {
-    const {id, config} = this.props;
-    const action = id ? 'edit' : 'add';
+    const {id, config,action} = this.props;
     const {loading: fetching} = this.props.dataManipulator;
     const {loading: temping, local,server,index} = this.props.tempData;
     const loading = fetching || temping;
