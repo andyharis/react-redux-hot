@@ -1,7 +1,7 @@
 const path = require('path');
 var webpack = require('webpack');
 module.exports = {
-   output: {
+  output: {
     filename: 'bundle.js',
     // the output bundle
     path: path.resolve(__dirname, '../dist'),
@@ -20,6 +20,10 @@ module.exports = {
           'babel-loader',
         ],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       },
     ],
   },

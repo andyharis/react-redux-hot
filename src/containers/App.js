@@ -1,27 +1,43 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {increment,decrement} from 'redux/modules/increment';
-const mapStateToProps = state => {
-  return {
-    count: state.increment.count
-  }
-}
+import {Layout, Menu} from 'antd';
+import Router from 'routes';
+import {Link} from 'react-router-dom';
+import './App.css';
+import * as tables from 'configs/tables';
+import HocTableGrid from 'components/table/HocTableGrid';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    increment: e=>dispatch(increment()),
-    decrement: e=>dispatch(decrement()),
-  }
-}
-
-@connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
+
   render() {
-    const {count} = this.props;
-    return <div>
-      You clicked this button {count} times.
-      <button onClick={this.props.increment}>Increment</button>
-      <button onClick={this.props.decrement}>Decrement</button>
-    </div>
+    return (<Layout className="layout">
+        <Layout.Header>
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            style={{lineHeight: '64px'}}
+          >
+            <Menu.Item key="1">
+              <Link to="/table/clients">Clients</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link to="/table/sites">Sites</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to="/tree">Tree</Link>
+            </Menu.Item>
+          </Menu>
+        </Layout.Header>
+
+        <Layout.Content>
+          <div className="content">
+              <Router/>
+          </div>
+        </Layout.Content>
+
+        <Layout.Footer>
+        </Layout.Footer>
+
+      </Layout>
+    );
   }
 }
