@@ -1,4 +1,4 @@
-import {TextInputTypeConfig, DateTypeConfig, DropdownTypeConfig} from 'components/types';
+import {TextInputTypeConfig, DateTypeConfig, DropdownTypeConfig, RelationTypeConfig} from 'components/types';
 import product from './product';
 const {attributes: {bStockItem}} = product;
 export default {

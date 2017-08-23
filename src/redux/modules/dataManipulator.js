@@ -1,7 +1,7 @@
 const FETCH_START = 'FETCH_START';
 const FETCH_ERROR = 'FETCH_ERROR';
 const FETCH_SUCCESS = 'FETCH_SUCCESS';
-
+import config from 'config';
 const initialState = {
   result: [],
   loading: false,
@@ -25,6 +25,6 @@ export default function (state = initialState, action = {}) {
 export function fetchData(table, params = {}) {
   return {
     types: [FETCH_START, FETCH_SUCCESS, FETCH_ERROR],
-    request: (api) => api.get(`http://grid.com/gql/${table}`, {params})
+    request: (api) => api.get(`${config.API.host}${table}`, {params})
   }
 }

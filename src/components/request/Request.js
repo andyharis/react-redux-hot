@@ -1,7 +1,6 @@
 import axios from 'axios';
+import config from 'config';
 
-export function Request() {
-  this.prototype.get = (url, params) => axios.get(url, params);
-  this.prototype.post = (url, data) => axios.post(url, data);
-  return this;
+export default function Request(url, params = {}) {
+  return axios.get(`${config.API.host}${url}`, {params: params})
 }
