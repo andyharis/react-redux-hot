@@ -3,6 +3,7 @@ import TypeConfig, {TypeForm, TypeView} from './Type';
 import {Icon, Select, Modal} from 'antd';
 import Request from "components/request/Request";
 import GridTable from "containers/GridTable";
+import * as configs from "configs/tables"
 
 @TypeForm
 export class RelationTypeForm extends Component {
@@ -30,7 +31,7 @@ export class RelationTypeForm extends Component {
   }
 
   render() {
-    const {value, label, pk, searchField, handleChange} = this.props;
+    const {value, label, pk, searchField, handleChange, searchTable} = this.props;
     const {data,visible} = this.state;
 
     return <div>
@@ -62,7 +63,7 @@ export class RelationTypeForm extends Component {
         okText="OK"
         cancelText="Cancel"
         onCancel={this.showModal}>
-        <GridTable />
+        <GridTable table={searchTable} config={configs[searchTable]}/>
       </Modal>
     </div>
   }
