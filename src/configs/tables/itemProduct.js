@@ -21,6 +21,12 @@ export default {
       pk: 'iID',
       searchTable: itemCategory.table
     },
+    iItemSubCategoryID:{
+      ...RelationTypeConfig,
+      searchField: 'sName',
+      pk: 'iID',
+      searchTable: itemSubCategory.table
+    },
     itemCategory: {
       attributes: {
         sName

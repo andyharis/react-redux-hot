@@ -2,7 +2,7 @@ import React, {Component,} from 'react';
 import TypeConfig, {TypeForm, TypeView} from './Type';
 import {Icon, Select, Modal} from 'antd';
 import Request from "components/request/Request";
-import GridTable from "containers/GridTable";
+import Grid from "containers/Grid";
 import * as configs from "configs/tables"
 
 @TypeForm
@@ -33,7 +33,8 @@ export class RelationTypeForm extends Component {
   render() {
     const {value, label, pk, searchField, handleChange, searchTable} = this.props;
     const {data,visible} = this.state;
-
+    console.log(configs,searchTable);
+    const params = {};
     return <div>
       <Select
         defaultValue={value}
@@ -63,7 +64,8 @@ export class RelationTypeForm extends Component {
         okText="OK"
         cancelText="Cancel"
         onCancel={this.showModal}>
-        <GridTable table={searchTable} config={configs[searchTable]}/>
+        Test
+        <Grid config={configs[searchTable]} params={params}/>
       </Modal>
     </div>
   }

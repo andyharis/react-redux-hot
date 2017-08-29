@@ -1,6 +1,7 @@
-import {TextInputTypeConfig} from 'components/types';
+import {MainConfig,TextInputTypeConfig} from 'components/types';
 
 export default {
+  ...MainConfig,
   table: 'itemSubCategory',
   attributes: {
     sName: {

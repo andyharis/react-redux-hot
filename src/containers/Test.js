@@ -38,7 +38,7 @@ export default class Test extends Component {
     //   </Form>
     // );
     return (<div>
-        <TypeComponent {...config.attributes.iItemCategoryID} action={action}/>
+        <TypeComponent {...config.attributes.iItemSubCategoryID} action={action}/>
       </div>
     );
   }
