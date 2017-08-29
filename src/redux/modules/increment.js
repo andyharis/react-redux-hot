@@ -6,9 +6,9 @@ const initialState = {
 export default function (state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT:
-      return {count: state.count + 1};
+      return {count: state.count + 6};
     case DECREMENT:
-      return {count: state.count - 1};
+      return {count: state.count - 2};
     default:
       return state;
   }

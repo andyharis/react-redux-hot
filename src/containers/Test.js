@@ -11,7 +11,7 @@ const TypeComponent = (props) => {
   const Comp = Types[type];
   if (Comp)
     return <Comp {...props}/>
-  return <div>Type {type} error. Can't find component</div>
+  return <div>Type {type} error. Cant find component</div>
 }
 
 export default class Test extends Component {

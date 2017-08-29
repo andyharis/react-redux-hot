@@ -3,7 +3,7 @@ import {Controller, prepareColumns, Loader} from 'components/hoc';
 import {Pagination} from 'antd';
 import AgGridComponent from 'components/table/AgGridComponent';
 
-@Controller
+// @Controller
 export default class GridTable extends Component {
   state = {
     columns: [],
