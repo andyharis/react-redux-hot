@@ -47,7 +47,7 @@ export default class Grid extends Component {
   }
 
   render() {
-    const {config, onChange, params} = this.props;
+    const {config, onChange, params, options} = this.props;
     const {data, totalCount, page, loading} = this.state;
     const pagination = {
       total: parseInt(totalCount),
@@ -57,7 +57,7 @@ export default class Grid extends Component {
     };
     console.log(pagination);
     return <Loader loading={loading}>
-      <AgGridComponent config={config} loading={loading} data={data}/>
+      <AgGridComponent config={config} loading={loading} data={data} options={options}/>
       <br/>
       <Pagination {...pagination}/>
     </Loader>

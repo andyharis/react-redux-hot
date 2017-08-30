@@ -12,7 +12,7 @@ const TypeComponent = (propsCol) => {
   const Comp = Types[type];
   if (Comp)
     return <Comp {...props}/>
-  return <div>Type {type} error. Can't find component</div>
+  return <div>Type {type} error. Can t find component</div>
   // return <div>111</div>
 }
 
@@ -48,9 +48,11 @@ export default class AgGridComponent extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired,
     data: PropTypes.array,
+    options: PropTypes.object
   };
   static defaultProps = {
-    data: []
+    data: [],
+    options: {}
   }
 
   state = {
@@ -63,8 +65,9 @@ export default class AgGridComponent extends Component {
   }
 
   render() {
-    const {config, data} = this.props;
+    const {config, data, options} = this.props;
     const {columnDefs} = this.state;
+    console.log("options", options);
     return <div className="ag-fresh" style={{height: '200px'}}>
       <AgGridReact
         gridOptions={{
@@ -72,6 +75,7 @@ export default class AgGridComponent extends Component {
         }}
         columnDefs={getColumns(this.props.config.attributes)}
         rowData={data}
+        {...options}
       />
     </div>
   }
