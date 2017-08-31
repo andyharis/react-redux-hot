@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {GridTypeRender} from "components/types/Helper";
+import {InputTypeRender} from "components/types/Helper";
 import DefaultDetailsBuilder from './DefaultDetailsBuilder';
 import DefaultInput from './DefaultInput';
 
@@ -9,15 +9,18 @@ function prepareInputs(attributes, props, chain) {
   for (let attribute in attributes) {
     const object = attributes[attribute];
     if (!object.attributes) {
-      const nProps = {
-        ...object,
-        onChange: data => props.onChange(data, [...chain, attribute])
-      };
-      data.push(
-        <DefaultInput label={object.label} key={`${chain.join('.')}.${attribute}`}>
-          {GridTypeRender(nProps, chain, props.data, {action: props.action})}
-        </DefaultInput>
-      )
+      if (object.exclude.indexOf(props.action) === -1) {
+        const nProps = {
+          ...object,
+          attribute: object.attribute || attribute,
+          onChange: data => props.onChange(data, [...chain, attribute])
+        };
+        data.push(
+          <DefaultInput label={object.label || attribute} key={`${chain.join('.')}.${attribute}`}>
+            {InputTypeRender(nProps, chain, props.data, {action: props.action, appearance: props.appearance})}
+          </DefaultInput>
+        )
+      }
     } else
       data = [...data, ...prepareInputs(object.attributes, props, [...chain, attribute])];
   }
@@ -34,16 +37,16 @@ class DefaultFormBuilder extends Component {
     action: PropTypes.string
   }
 
-  tempSave = (value, {localChain,serverChain}) => {
-    console.info(value, localChain,serverChain);
+  tempSave = (value, {localChain, serverChain}) => {
+    console.info(value, localChain, serverChain);
   }
 
   render() {
-    const {config, local,server, action} = this.props;
-    console.info(this.props.local);
+    const {config, local, server, action} = this.props;
     const types = prepareInputs(config.attributes, {
       data: local,
-      action: 'form',
+      appearance: 'form',
+      action,
       onChange: this.tempSave
     }, []);
     return <div>

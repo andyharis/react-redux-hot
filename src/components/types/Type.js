@@ -11,7 +11,11 @@ export const TypeForm = (TypeComponent) => {
       value: this.props.value || ''
     }
 
-    handleChange = e => this.setState({value: e.target ? e.target.value : e}, b => this.props.onChange(this.state.value, this.props))
+    handleChange = e =>{
+      this.setState({value: e.target ? e.target.value : e},
+        b => {this.props.onChange &&
+        this.props.onChange(this.state.value, this.props)})
+    }
 
     render() {
       const {value} = this.state;

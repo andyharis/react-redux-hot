@@ -43,7 +43,10 @@ export default {
     },
     itemSubCategory: {
       attributes: {
-        sName: subCategory
+        sName: {
+          ...subCategory,
+          exclude:['add','edit']
+        }
       }
     },
     product: {
