@@ -10,6 +10,10 @@ export default {
   ...MainConfig,
   table: 'itemProduct',
   attributes: {
+    iID: {
+      ...TextInputTypeConfig,
+      exclude:['add','edit','grid']
+    },
     sName: {
       ...TextInputTypeConfig,
       attribute: 'sName',
@@ -19,17 +23,22 @@ export default {
       ...RelationTypeConfig,
       searchField: 'sName',
       pk: 'iID',
-      searchTable: itemCategory.table
+      searchTable: itemCategory.table,
+      exclude:['grid']
     },
     iItemSubCategoryID:{
       ...RelationTypeConfig,
       searchField: 'sName',
       pk: 'iID',
-      searchTable: itemSubCategory.table
+      searchTable: itemSubCategory.table,
+      exclude:['grid']
     },
     itemCategory: {
       attributes: {
-        sName
+        sName:{
+          ...sName,
+          exclude:['add','edit']
+        }
       }
     },
     itemSubCategory: {

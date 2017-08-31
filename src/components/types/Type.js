@@ -38,6 +38,8 @@ export const MainConfig = {
   table: 'default',
   limit: 10,
   pk: 'iID',
+  edit: true,
+  delete: true,
   toDetails: function () {
     return {
       table: this.table,
@@ -47,6 +49,6 @@ export const MainConfig = {
 };
 
 const TypeConfig = {
-  label: 'Label title'
+  exclude: [], //add,edit,grid
 }
 export default TypeConfig;

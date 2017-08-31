@@ -1,15 +1,17 @@
 import React, {Component,} from 'react';
+import PropTypes from 'prop-types';
 import TypeConfig, {TypeForm, TypeView} from './Type';
 import {Icon, Select, Modal} from 'antd';
 import Request from "components/request/Request";
 import Grid from "containers/Grid";
-import * as configs from "configs/tables"
+import * as configs from "configs/tables";
+import _ from 'lodash';
 
 @TypeForm
 export class RelationTypeForm extends Component {
   state = {
     data: [],
-    visible:false
+    visible: false
   }
 
   handleSearch = (value) => {
@@ -22,7 +24,7 @@ export class RelationTypeForm extends Component {
     })
   }
 
-  showModal = () =>{
+  showModal = () => {
     this.setState({visible: !this.state.visible});
   }
 
@@ -32,8 +34,8 @@ export class RelationTypeForm extends Component {
 
   render() {
     const {value, label, pk, searchField, handleChange, searchTable} = this.props;
-    const {data,visible} = this.state;
-    console.log(configs,searchTable);
+    const {data, visible} = this.state;
+    console.log(configs, searchTable);
     const params = {};
     return <div>
       <Select
@@ -73,9 +75,13 @@ export class RelationTypeForm extends Component {
 
 @TypeView
 export class RelationTypeView extends Component {
+  static propTypes = {
+    row: PropTypes.object
+  }
+
   render() {
-    const {value} = this.props;
-    return <div>{value}</div>
+    const {value, row, searchTable, searchField} = this.props;
+    return <div>{_.get(row, `${searchTable}.${searchField}`, value)}</div>
   }
 }
 

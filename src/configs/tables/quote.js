@@ -6,6 +6,10 @@ export default {
   ...MainConfig,
   table: 'quote',
   attributes: {
+    iID: {
+      ...TextInputTypeConfig,
+      exclude:['add','edit','grid']
+    },
     sName: {
       ...TextInputTypeConfig,
       attribute: 'sName',

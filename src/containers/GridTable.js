@@ -3,7 +3,7 @@ import {Controller, prepareColumns, Loader} from 'components/hoc';
 import {Pagination} from 'antd';
 import AgGridComponent from 'components/table/AgGridComponent';
 
-// @Controller
+@Controller
 export default class GridTable extends Component {
   state = {
     columns: [],
@@ -16,8 +16,11 @@ export default class GridTable extends Component {
 
   setColumns = () => {
     const {config} = this.props;
+    const columns = [
+      ...prepareColumns(config.attributes, {action: this.state.action ? 'view' : 'form'})
+    ];
     this.setState({
-      columns: prepareColumns(config.attributes, {action: this.state.action ? 'view' : 'form'})
+      columns
     });
   }
 
@@ -31,9 +34,11 @@ export default class GridTable extends Component {
       current: parseInt(page) || 1,
       onChange: (page) => history.push(`/table/${table}/${page}`)
     };
-    // const {columns} = this.state;
     return <Loader loading={loading}>
-      <AgGridComponent config={config} loading={loading} data={data}/>
+      <AgGridComponent
+        config={config}
+        data={data}
+      />
       <br/>
       <Pagination {...pagination}/>
     </Loader>

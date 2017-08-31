@@ -43,6 +43,7 @@ export default class DefaultDetailsRow extends Component {
     const {data, config} = this.props;
     const {columns, isOpen} = this.state;
     return <Card
+      style={{marginTop:'3px'}}
       title={<span className="pointer" onClick={this.toggleShow}>Details {config.label || config.table}</span>}
       bordered={false}
       bodyStyle={{padding: isOpen ? 10 : 0}}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --debug --colors --config webpack/dev.js",
-    "start":"node server.js",
+    "start": "node server.js",
     "build": "webpack --config webpack/prod.js --progress --colors --debug"
   },
   "author": "",
@@ -27,6 +27,7 @@
     "react-router-dom": "^4.1.2",
     "redux": "^3.7.2",
     "redux-connect": "^5.1.0",
+    "semantic-ui-react": "^0.72.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1"
   },

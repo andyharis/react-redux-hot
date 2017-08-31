@@ -4,6 +4,10 @@ export default {
   ...MainConfig,
   table: 'itemCategory',
   attributes: {
+    iID: {
+      ...TextInputTypeConfig,
+      exclude:['add','edit','grid']
+    },
     sName: {
       ...TextInputTypeConfig,
       attribute: 'sName',
