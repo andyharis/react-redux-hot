@@ -9,7 +9,7 @@ import * as configs from "configs/tables"
 export class RelationTypeForm extends Component {
   state = {
     data: [],
-    visible:false,
+    visible: false,
     selRow: {}
   }
 
@@ -18,20 +18,20 @@ export class RelationTypeForm extends Component {
     let select = {};
     select[searchField] = `:~${val}`;
     select[pk] = "";
-    if(val!==""){
+    if (val !== "") {
       Request(searchTable, {select: select, 'per-page': 7}).then((result) => {
         this.setState({data: result.data.data});
       })
     }
   }
 
-  showModal = () =>{
+  showModal = () => {
     this.setState({visible: !this.state.visible, selRow: {}});
   }
 
   handleOk = () => {
     const {selRow} = this.state;
-    this.setState({data: [selRow]}, ()=>{
+    this.setState({data: [selRow]}, () => {
       this.props.handleChange(selRow[this.props.pk]);
       this.showModal();
     });
@@ -41,15 +41,15 @@ export class RelationTypeForm extends Component {
     this.setState({selRow: row.data});
   }
 
-  rowDoubleClick = (row) =>{
-    this.setState({selRow: row.data}, ()=>{
+  rowDoubleClick = (row) => {
+    this.setState({selRow: row.data}, () => {
       this.handleOk();
     });
   }
 
   render() {
     const {value, label, pk, searchField, handleChange, searchTable} = this.props;
-    const {data,visible, selRow} = this.state;
+    const {data, visible, selRow} = this.state;
     const params = {};
     return <div>
       <Select
@@ -71,27 +71,31 @@ export class RelationTypeForm extends Component {
         }
       </Select>
       <Icon type="search" onClick={this.showModal}/>
-      {value && <Icon type="delete"  onClick={()=>{this.setState({data: []}, ()=>{handleChange("")})}}/>}
+      {value && <Icon type="delete" onClick={() => {
+        this.setState({data: []}, () => {
+          handleChange("")
+        })
+      }}/>}
       {visible &&
-        <Modal
-          title="Basic Modal"
-          visible={visible}
-          onOk={this.handleOk}
-          onCancel={this.showModal}
-          footer={[
-                     <Button key="back" size="large" onClick={this.showModal}>Return</Button>,
-                     <Button key="submit" type="primary" size="large"
-                        disabled={selRow[pk]?false:true}
-                        onClick={this.handleOk}>
-                         Select
-                       </Button>,
-                   ]}>
-          <Grid config={configs[searchTable]} params={params}
-           options={{
-            onCellClicked: this.selectRow,
-            onCellDoubleClicked: this.rowDoubleClick,
-          }}/>
-        </Modal>
+      <Modal
+        title="Basic Modal"
+        visible={visible}
+        onOk={this.handleOk}
+        onCancel={this.showModal}
+        footer={[
+          <Button key="back" size="large" onClick={this.showModal}>Return</Button>,
+          <Button key="submit" type="primary" size="large"
+                  disabled={selRow[pk] ? false : true}
+                  onClick={this.handleOk}>
+            Select
+          </Button>,
+        ]}>
+        <Grid config={configs[searchTable]} params={params}
+              options={{
+                onCellClicked: this.selectRow,
+                onCellDoubleClicked: this.rowDoubleClick,
+              }}/>
+      </Modal>
       }
 
     </div>
