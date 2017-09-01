@@ -39,6 +39,7 @@ export default class EditTable extends Component {
       <Loader loading={loading}
               showWhileLoading={false}
               hint={message}>
+
         {!loading && local &&
         <DefaultFormBuilder local={local[index]}
                             config={config}

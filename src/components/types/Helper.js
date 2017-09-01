@@ -9,12 +9,19 @@ export function TypeRender(props) {
   const Comp = Types[type];
   if (Comp)
     return <Comp {...props}/>
-  return <span>Can't find type <b>{type}</b>.</span>
+  return <span>Cant find type <b>{type}</b>.</span>
 }
 export function InputTypeRender(props, chain = [], data = {}, additionalProps = {}) {
   chain = [...chain, props.attribute];
   console.info(props.attribute);
   return TypeRender({...props, ...additionalProps, value: _.get(data, props.attribute, ''), chain, row: data});
+}
+
+export function NormalTypeRender(props) {
+  return TypeRender({
+    ...props,
+    value:_.get(props.row,props.attribute)
+  });
 }
 export function GridTypeRender(props, chain = [], data = {}, additionalProps = {}) {
   chain = [...chain, props.attribute];

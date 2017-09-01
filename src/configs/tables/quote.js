@@ -5,6 +5,7 @@ import job from './job';
 export default {
   ...MainConfig,
   table: 'quote',
+  form:'Quote',
   attributes: {
     iID: {
       ...TextInputTypeConfig,

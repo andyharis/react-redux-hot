@@ -1720,3 +1720,17 @@ a.ui.basic.label.checklist-button {
 .textarea-editor .cke_combo_arrow{
   margin: 8px 0px 0px;
 }
+.form-content, .details-content{
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.details-content .ant-card-head, .details-content.ant-card-wider-padding .ant-card-head{
+  height: 36px;
+  line-height: 35px;
+  padding: 0px 5px
+}
+
+.details-content .ant-card-head div{
+  width: 100%;
+}
