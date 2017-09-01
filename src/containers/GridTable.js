@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Controller, prepareColumns, Loader} from 'components/hoc';
 import {Pagination} from 'antd';
 import AgGridComponent from 'components/table/AgGridComponent';
+import {Segment} from 'semantic-ui-react';
 
 @Controller
 export default class GridTable extends Component {
@@ -34,13 +35,16 @@ export default class GridTable extends Component {
       current: parseInt(page) || 1,
       onChange: (page) => history.push(`/table/${table}/${page}`)
     };
-    return <Loader loading={loading}>
-      <AgGridComponent
-        config={config}
-        data={data}
-      />
-      <br/>
-      <Pagination {...pagination}/>
-    </Loader>
+    return <Segment basic>
+      <Loader loading={loading}>
+        <AgGridComponent
+          config={config}
+          data={data}
+          {...this.props.agGrid}
+        />
+        <br/>
+        <Pagination {...pagination}/>
+      </Loader>
+    </Segment>
   }
 }
