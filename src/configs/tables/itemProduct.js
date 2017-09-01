@@ -1,9 +1,9 @@
 import {MainConfig, TextInputTypeConfig, RelationTypeConfig} from 'components/types';
-import product from './product';
+// import product from './product';
 import itemCategory from './itemCategory';
 import itemSubCategory from './itemSubCategory';
 
-const {attributes: {bStockItem}} = product;
+// const {attributes: {bStockItem}} = product;
 const {attributes: {sName}} = itemCategory;
 const {attributes: {sName: subCategory, markup}} = itemSubCategory;
 export default {
@@ -48,10 +48,10 @@ export default {
         markup
       }
     },
-    product: {
-      attributes: {
-        bStockItem
-      }
-    }
+    // product: {
+    //   attributes: {
+    //     bStockItem
+    //   }
+    // }
   }
 }
