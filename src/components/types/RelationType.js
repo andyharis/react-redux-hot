@@ -20,7 +20,7 @@ export class RelationTypeForm extends Component {
     if (row) {
       const d = row[this.props.searchTable];
       this.setState({
-        data:  d ? [d] : []
+        data: d ? [d] : []
       });
     }
   }
@@ -60,10 +60,16 @@ export class RelationTypeForm extends Component {
   }
 
 
+  handleChange = (value) => {
+    if (!value)
+      this.setState({data: []}, e => this.props.handleChange(value || ''));
+    else
+      this.props.handleChange(value)
+  }
+
   render() {
     const {value, label, pk, searchField, handleChange, searchTable} = this.props;
     const {data, visible, selRow} = this.state;
-    // console.info(data,value);
     const params = {};
     return <div>
       <Select
@@ -73,7 +79,8 @@ export class RelationTypeForm extends Component {
         notFoundContent="Not Found"
         optionFilterProp="children"
         style={{width: 200}}
-        onChange={handleChange}
+        allowClear={true}
+        onChange={this.handleChange}
         onSearch={this.handleSearch}
         filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
       >
@@ -84,11 +91,11 @@ export class RelationTypeForm extends Component {
         })}
       </Select>
       <Icon type="search" onClick={this.showModal}/>
-      {value && <Icon type="delete" onClick={() => {
-        this.setState({data: []}, () => {
-          handleChange("")
-        })
-      }}/>}
+      {/*{value && <Icon type="delete" onClick={() => {*/}
+      {/*this.setState({data: []}, () => {*/}
+      {/*handleChange("")*/}
+      {/*})*/}
+      {/*}}/>}*/}
       {visible &&
       <Modal
         title="Basic Modal"

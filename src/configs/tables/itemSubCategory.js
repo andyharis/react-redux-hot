@@ -1,5 +1,5 @@
-import {MainConfig,TextInputTypeConfig} from 'components/types';
-
+import {MainConfig, TextInputTypeConfig} from 'components/types';
+import markup from './markup';
 export default {
   ...MainConfig,
   table: 'itemSubCategory',
@@ -13,6 +13,13 @@ export default {
       ...TextInputTypeConfig,
       attribute: 'sDesc',
       label: 'Description'
+    },
+    dMarkup: {
+      ...TextInputTypeConfig,
+      attribute: 'dMarkup'
+    },
+    markup: {
+      attributes: markup.attributes
     }
   }
 }

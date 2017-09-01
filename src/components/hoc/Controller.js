@@ -5,6 +5,8 @@ import {GridTypeRender} from 'components/types/Helper';
 import {connect} from 'react-redux';
 import {fetchData} from "redux/modules/dataManipulator";
 import _ from 'lodash';
+import queryString from 'query-string';
+
 
 export function getSelectAttributes(attributes) {
   const data = {};
@@ -78,9 +80,10 @@ export function prepareDataForFetch(table, additionalParams = {}, withDetails = 
         params.select[details.table] = getSelectAttributes(details.attributes);
       });
     }
-    if (params.where) {
-      params.where = JSON.stringify(params.where);
-    }
+    // if (params.where) {
+    //   params.where = JSON.stringify(params.where);
+    //   console.info(params,JSON.stringify(params.where));
+    // }
     return params;
   }
   return false;
@@ -92,6 +95,9 @@ const mapDispatch = {fetchData};
 @connect(mapState, mapDispatch)
 export default function Controller(WrappedComponent) {
   return class Controller extends Component {
+    state = {
+      sort: []
+    }
     static propTypes = {
       dataManipulator: PropTypes.object,
       fetchData: PropTypes.func
@@ -107,9 +113,12 @@ export default function Controller(WrappedComponent) {
     }
 
     fetchData = (props) => {
-      const {match: {params: {table, page, id}}} = props;
+      const {match: {params: {table, page, id}}, location: {search}} = props;
       const config = configs[table];
-      const params = {};
+      const queryParams = queryString.parse(search);
+      const params = {
+        ...queryParams
+      };
       if (page)
         params.page = page;
       if (id)
@@ -117,8 +126,30 @@ export default function Controller(WrappedComponent) {
       this.props.fetchData(table, prepareDataForFetch(table, params, id));
     }
 
+    onSort = (sortData) => {
+      const {history, location: {pathname, search}} = this.props;
+      let query = queryString.parse(search);
+      query.sort = [];
+      sortData.forEach(({colId, sort}) => {
+        query.sort.push(`${sort == 'desc' ? '!' : ''}${colId}`);
+      });
+      query.sort = query.sort.join(',');
+      // query.sort = query.sort.match('!') ? query.sort.replace('!', '') : '!' + query.sort;
+      let newUrl = `${pathname}?${queryString.stringify(query)}`;
+      const sort = [];
+      if (query.sort)
+        query.sort.split(',').forEach((attr) => {
+          sort.push({
+            colId: attr.replace('!'),
+            sort: attr.match('!') ? 'desc' : 'asc'
+          })
+        });
+      this.setState({sort}, e => history.push(newUrl));
+    }
+
     render() {
-      const {match: {params: {table, page, id}, url}} = this.props;
+      const {match: {params: {table, page, id}, url}, location: {search}} = this.props;
+      const {sort} = this.state;
       const config = configs[table];
       let action = id ? 'edit' : 'add';
       if (url.match('table'))
@@ -129,6 +160,10 @@ export default function Controller(WrappedComponent) {
         </div>
       return <div>
         <WrappedComponent {...this.props}
+                          agGrid={{
+                            onSort: this.onSort,
+                            sort: sort
+                          }}
                           action={action}
                           table={table}
                           page={page}

@@ -5,39 +5,37 @@ import itemSubCategory from './itemSubCategory';
 
 const {attributes: {bStockItem}} = product;
 const {attributes: {sName}} = itemCategory;
-const {attributes: {sName: subCategory}} = itemSubCategory;
+const {attributes: {sName: subCategory, markup}} = itemSubCategory;
 export default {
   ...MainConfig,
   table: 'itemProduct',
   attributes: {
     iID: {
       ...TextInputTypeConfig,
-      exclude:['add','edit','grid']
+      exclude: ['add', 'edit', 'grid']
     },
-    sName: {
-      ...TextInputTypeConfig,
-      attribute: 'sName',
-      label: 'Product'
-    },
+    sCode: {...TextInputTypeConfig, label: 'Code *', attribute: 'sCode'},
+    sName: {...TextInputTypeConfig, label: 'Name *', attribute: 'sName', link: true},
+    sDesc: {...TextInputTypeConfig, label: 'Description', attribute: 'sDesc', popup: true},
     iItemCategoryID: {
       ...RelationTypeConfig,
       searchField: 'sName',
       pk: 'iID',
       searchTable: itemCategory.table,
-      exclude:['grid']
+      exclude: ['grid']
     },
-    iItemSubCategoryID:{
+    iItemSubCategoryID: {
       ...RelationTypeConfig,
       searchField: 'sName',
       pk: 'iID',
       searchTable: itemSubCategory.table,
-      exclude:['grid']
+      exclude: ['grid']
     },
     itemCategory: {
       attributes: {
-        sName:{
+        sName: {
           ...sName,
-          exclude:['add','edit']
+          exclude: ['add', 'edit']
         }
       }
     },
@@ -45,8 +43,9 @@ export default {
       attributes: {
         sName: {
           ...subCategory,
-          exclude:['add','edit']
-        }
+          exclude: ['add', 'edit']
+        },
+        markup
       }
     },
     product: {

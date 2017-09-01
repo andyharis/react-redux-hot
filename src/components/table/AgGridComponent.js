@@ -53,7 +53,8 @@ export default class AgGridComponent extends Component {
     config: PropTypes.object.isRequired,
     data: PropTypes.array,
     options: PropTypes.object,
-    additionalColumns: PropTypes.array
+    additionalColumns: PropTypes.array,
+    onSort: PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -66,12 +67,35 @@ export default class AgGridComponent extends Component {
   }
 
   componentWillMount() {
+    this.setState({
+      gridOptions: {
+        overlayNoRowsTemplate: '<span></span>',
+        enableSorting: true,
+        enableColResize: true,
+        paginationPageSize: this.props.config.limit,
+      }
+    });
     // this.setState({columnDefs: getColumns(this.props.config.attributes)});
+  }
+
+  componentWillReceiveProps(props) {
+    const {gridOptions} = this.state;
+    if (this.props.sort !== props.sort) {
+      console.info('sort',props.sort);
+      // gridOptions.api && gridOptions.api.setSortModel(props.sort);
+    }
+  }
+
+  onSort = () => {
+    const {gridOptions} = this.state;
+    let models = gridOptions.api && gridOptions.api.getSortModel();
+    if (this.props.onSort)
+      this.props.onSort(models);
   }
 
   render() {
     const {config, data, options} = this.props;
-    const {columnDefs} = this.state;
+    const {columnDefs, gridOptions} = this.state;
     const cols = [
       {
         headerName: 'Settings', field: 'test', width: 45, cellRendererFramework: function ({data}) {
@@ -89,9 +113,9 @@ export default class AgGridComponent extends Component {
     ];
     return <div className="ag-fresh" style={{height: '300px'}}>
       <AgGridReact
-        gridOptions={{
-          overlayNoRowsTemplate: '<span></span>'
-        }}
+        sortModel={this.props.sort || []}
+        onSortChanged={this.onSort}
+        gridOptions={gridOptions}
         columnDefs={cols}
         rowData={data}
         {...options}
