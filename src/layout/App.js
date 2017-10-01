@@ -3,11 +3,8 @@ import {Layout, Menu} from 'antd';
 import Router from 'routes';
 import {Link} from 'react-router-dom';
 import './App.css';
-import * as tables from 'configs/tables';
-import HocTableGrid from 'components/table/HocTableGrid';
 
 export default class App extends Component {
-
   render() {
     return (<Layout className="layout">
         <Layout.Header>
@@ -17,24 +14,21 @@ export default class App extends Component {
             style={{lineHeight: '64px'}}
           >
             <Menu.Item key="1">
-              <Link to="/table/clients">Clients</Link>
+              <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to="/table/sites">Sites</Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to="/tree">Tree</Link>
+              <Link to="/test">Test page</Link>
             </Menu.Item>
           </Menu>
         </Layout.Header>
-
         <Layout.Content>
           <div className="content">
-              <Router/>
+            <Router/>
           </div>
         </Layout.Content>
 
         <Layout.Footer>
+          Footer blyati
         </Layout.Footer>
 
       </Layout>

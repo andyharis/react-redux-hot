@@ -22,9 +22,9 @@ export default function (state = initialState, action = {}) {
 }
 
 
-export function fetchData(table, params = {}) {
+export function fetchData(url, params = {}) {
   return {
     types: [FETCH_START, FETCH_SUCCESS, FETCH_ERROR],
-    request: (api) => api.get(`${config.API.host}${table}`, {params})
+    request: (api) => api.get(`${config.API.host}${url}`, {params})
   }
 }

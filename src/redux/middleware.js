@@ -1,6 +1,17 @@
 import axios from 'axios';
+import Log from 'helpers/Output';
 
 const api = axios;
+
+const getErr = err => {
+  const data = {
+    message: err.message || "Something bad happened on server side!",
+    body: err.response,
+    request: err.request
+  };
+  Log({title: 'Error on API', table: data});
+  return data;
+}
 const middleware = store => next => action => {
   if (typeof action === 'function')
     return action(store.dispatch, store.getState, api);
@@ -14,9 +25,9 @@ const middleware = store => next => action => {
     promise
       .then(
         (result) => next({...rest, result: result.data, type: SUCCESS}),
-        (error) => next({...rest, error, type: FAILURE})
+        (error) => next({...rest, error: getErr(error), type: FAILURE})
       )
-      .catch((error) => next({...rest, error, type: FAILURE}));
+      .catch((error) => next({...rest, error: getErr(error), type: FAILURE}));
   }, 500);
   return promise;
 };

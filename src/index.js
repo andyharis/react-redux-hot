@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './containers/App'
+import App from './layout/App'
 import configureStore from './redux/createStore';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
@@ -18,14 +18,13 @@ const render = Component => {
     document.getElementById('root')
   )
 }
-console.info(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
   render(App);
 } else {
   render(App)
   if (module.hot) {
-    module.hot.accept('./containers/App', () => {
-      const NextApp = require('./containers/App').default;
+    module.hot.accept('./layout/App', () => {
+      const NextApp = require('./layout/App').default;
       render(NextApp);
     });
   }
